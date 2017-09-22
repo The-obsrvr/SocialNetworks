@@ -4,6 +4,7 @@ from tweepy.streaming import StreamListener
 
 
 #consumer key, consumer secret, access token, access secret.
+# for all the tutorials and code refer https://pythonprogramming.net/twitter-api-streaming-tweets-python-tutorial/?completed=/mysql-live-database-example-streaming-data/
 ckey="Ht2hjyNon1BgyMxhBhbC2reSF"
 csecret="1REwJr4uTdTVKVlMTmbeNBPDDEJJuQspdZD7kpc0f7U4AkQHI4"
 atoken="738527443-xXzYkJ8SEIZuCI4dCAoPLmV6rwi8joLDR226BirC"
