@@ -49,19 +49,35 @@ api = twitter_setup()
 #for tweet in tweets[:5]:
     #print(tweet.text)
     #print()
-
-tweets = tweepy.Cursor(api.search, q='hattrick').items(100)
-
+search_text= "#MannKiBaat"
+search_number = 10
+tweets=(api.search(search_text, rpp=search_number))
+#tweets = tweepy.Cursor(api.search, q='SadhguruQuotes').items(5)
+#for i in tweets:
+	#print (i.text)
 
 #Creating a (pandas) DataFrame
 # We create a pandas dataframe as follows:
 data = pd.DataFrame(data=[tweet.text for tweet in tweets], columns=['Tweets'])
 
 # We display the first 10 elements of the dataframe:
-display(data.tail(5))
+#display(data.head(10))
 
 #Extracting hashtags
+def extract_hash_tags(text):
+	return set([re.sub(r"(\W+)$", "", j) for j in set([i for i in text.split() if i.startswith("#")])])
+def extract_mentions(text):
+	return set([re.sub(r"(\W+)$", "", j) for j in set([i for i in text.split() if i.startswith("@")])])
+#Storing 
+data['HashTags'] = np.array([(extract_hash_tags(i)) for i in data['Tweets']])
+data['Mentions'] = np.array([(extract_mentions(i)) for i in data['Tweets']])
+data['Date'] = np.array([tweet.created_at for tweet in tweets])
+data['RTs']    = np.array([tweet.retweet_count for tweet in tweets])
+data['User'] = np.array([tweet.source_url for tweet in tweets])
+data.sort_values(by='Date', ascending=0)
+print(data)
 
+tlen=pd.Series(data=data['RTs'].values, index=data['Date'])
+tlen.plot(figsize=(16,4), color='r');
 
-#def extract_hash_tags(s):
-#return set([re.sub(r"(\W+)$", "", j) for j in set([i for i in text.split() if i.startswith("#")])])
+    
