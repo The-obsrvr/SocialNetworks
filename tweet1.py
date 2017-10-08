@@ -54,7 +54,7 @@ def extract_mentions(text):
     #print(tweet.text)
     #print()
 search_text= "#MannKiBaat"
-search_number = 10
+search_number = 100
 tweets=(api.search(search_text, rpp=search_number))
 #tweets = tweepy.Cursor(api.search, q='SadhguruQuotes').items(5)
 #for i in tweets:
