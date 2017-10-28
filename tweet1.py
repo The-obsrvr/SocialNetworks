@@ -53,31 +53,45 @@ def extract_mentions(text):
 #for tweet in tweets[:5]:
     #print(tweet.text)
     #print()
-search_text= "#MannKiBaat"
-search_number = 100
-tweets=(api.search(search_text, rpp=search_number))
-#tweets = tweepy.Cursor(api.search, q='SadhguruQuotes').items(5)
+tweets = tweepy.Cursor(api.search, q='#iphone', include_entities=True, lang="en").items(200)
+a=[(tweet.text,tweet.created_at,tweet.retweet_count,tweet.user.screen_name) for tweet in tweets]                 
+
 #for i in tweets:
 	#print (i.text)
 
 #Creating a (pandas) DataFrame
 # We create a pandas dataframe as follows:
-data = pd.DataFrame(data=[tweet.text for tweet in tweets], columns=['Tweets'])
-
-# We display the first 10 elements of the dataframe:
-#display(data.head(10))
-
-
+twetexts = [x[0] for x in a]
+twedate = [x[1] for x in a]
+tweret = [x[2] for x in a]
+tweuse = [x[3] for x in a]
+data = pd.DataFrame(data=twetexts, columns=['Tweets'])
 #Storing 
 data['HashTags'] = np.array([(extract_hash_tags(i)) for i in data['Tweets']])
 data['Mentions'] = np.array([(extract_mentions(i)) for i in data['Tweets']])
-data['Date'] = np.array([tweet.created_at for tweet in tweets])
-data['RTs']    = np.array([tweet.retweet_count for tweet in tweets])
-data['User'] = np.array([tweet.user.screen_name for tweet in tweets])
+data['Date'] = np.array(twedate)
+data['RTs']    = np.array(tweret)
+data['User'] = np.array(tweuse)
 data.sort_values(by='Date', ascending=0)
-print(data)
-
-tlen=pd.Series(data=data['RTs'].values, index=data['Date'])
-tlen.plot(figsize=(16,4), color='r');
+htlist = list(list(data['HashTags'][a]) for a in range(0,len(data)))
+#implementing as a dictionary in a dictionary
+from collections import defaultdict
+com = defaultdict(lambda : defaultdict(int))
+for k in range(0,len(htlist)):    
+    for i in range(len(htlist[k])-1):            
+        for j in range(i+1, len(htlist[k])):
+            w1, w2 = sorted([htlist[k][i], htlist[k][j]])                
+            if w1 != w2:
+                com[w1][w2] += 1
+com_max = []
+# For our term, look for the most common co-occurrent terms
+for t1 in com:
+    if(t1 == '#iphone'):
+        t1_max_terms = sorted(com[t1].items(), key=operator.itemgetter(1), reverse=True)[:5]
+        for t2, t2_count in t1_max_terms:
+            com_max.append(((t1, t2), t2_count))
+# Get the most frequent co-occurrences
+terms_max = sorted(com_max, key=operator.itemgetter(1), reverse=True)
+print(terms_max[:5])
 
     
