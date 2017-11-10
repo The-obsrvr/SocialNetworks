@@ -63,3 +63,9 @@ NetworkX is a python package for the creation, manipulation, and study of the st
 These are some standard libraries that are used for using Network X and various graph plotting mathematical tools
 
 //10
+
+Future Scope:
+For further improvemenet we are planning to involve the predictive analysis techniques to detect the probability of Hash Tag to get famous after sometime according to current analysis and Predicting the relationship stack changes for the current most active hashtags to determine predictive relationship. This is mostly based on the graph analysis over various relations and their co-relation. After performing a deep pratice over predictive analysis we will for its real world implementation and how adequately we can use this approach. We are also planning to use the same analytics with little alteration on different other social websites like Instagram, Facebook etc., to get the idea of its verstatlity and analytics approach.
+
+Results:
+Performing co-occurances on Hash tags provides the relationship of a particular Hash Tag with the related hash tags
