@@ -1,0 +1,65 @@
+Implementation
+1. M1: Extracting the hashtags from tweepy
+Twitter provides REST APIs you can use to interact with their service. There is also a bunch of Python-based clients out there that we can use without re-inventing the wheel.
+
+//1
+
+Creating an Authentication using request and response method:
+
+//2
+
+Now after establishing connection with tweepy a user can access alot of information includes co-occurances, hashtags, relations and even peoples related to the hastags.In this project we are extracting the data towards Tweeter Users and their Hashtags and the relation among them along with Date and time with Retweets. All this are occuring dynamincally and can be updated over time being.
+
+//3
+
+Extracting the data in a functions over particular iteration according to the user requirements.
+
+//4
+
+Now storing the data into a dictionary
+
+//5
+
+As an example we have generated a dataset over a recently famous hashtags "#giveaway". The data been generated with the table consists of ("Tweets", "Hashtags", "Mentions", "Date", "RTs", "User")
+
+The data been generated for 500 iterations that can be manipulated according to the requirement criteria.
+
+
+
+//6
+
+
+
+
+2. M2: Extracting the co ocuuring hash tags
+
+Now after preparing the dataset we can move towards finding the co-occurences among Hash Tags that can be further used for finding relations between Users or Hashtags.
+
+//7
+
+Above function working on O(n^3) complexity but their is lot more scope for
+further improvements.
+
+==> Now after getting the data over co-occurances we have to find the most frequent co-occurances to get the relationship of important actors inclusive to HashTags or related Tags.
+
+//8
+3. M3: Creating a structured dictionary
+
+After getting the data over co-occurances with the extraction of most frequent one we are using some basic sorting methods to assings high priority actors to low.
+
+The dictionary contains the most important data now for finding the relationship ["HashTag", "Key", "Values"]
+
+The data generated can be further used for plotting graphs over various functionalities.
+
+Visualization of the co-occuring Hashtags:
+Social Network Analysis with Python and NetworkX
+
+Social Network Analysis (SNA) has a wide applicability in many scientific fields and industries. This workshop is a gentle introduction to SNA using Python and NetworkX, a powerful and mature python library for the study of the structure, dynamics, and functions of complex networks.
+
+Creating and Manipulating Graphs using NetworkX
+
+NetworkX is a python package for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks.
+
+These are some standard libraries that are used for using Network X and various graph plotting mathematical tools
+
+//10
